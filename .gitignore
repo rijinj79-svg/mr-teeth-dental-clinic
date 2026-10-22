@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Django local files
+*.sqlite3
+db.sqlite3
+.env
+.env.*
+!.env.example
+
+# User uploads and generated static files
+media/
+staticfiles/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+projectclinic/nothing.env
+projectclinic/*.env

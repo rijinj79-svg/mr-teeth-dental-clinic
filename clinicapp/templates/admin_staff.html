@@ -1,0 +1,209 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Staff | Mr.Teeth{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <div class="eyebrow">Administrator only</div>
+                <h1 class="section-title mt-2">Staff Management</h1>
+                <p class="section-copy">
+                    Create staff accounts, upload staff photos,
+                    and manage account access.
+                </p>
+            </div>
+
+            <a href="{% url 'admin_dashboard' %}"
+               class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i>
+                Admin Dashboard
+            </a>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- CREATE STAFF -->
+            <div class="col-lg-5">
+                <div class="form-card p-4">
+                    <h4 class="fw-bold mb-3">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Create Staff Account
+                    </h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label"
+                                       for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+                                {% for error in field.errors %}
+                                    <div class="text-danger small">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+
+                                {% if field.help_text %}
+                                    <div class="form-text">
+                                        {{ field.help_text|safe }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button class="btn btn-gold" type="submit">
+                            <i class="bi bi-person-check me-1"></i>
+                            Create Staff
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- EXISTING STAFF -->
+            <div class="col-lg-7">
+                <div class="table-card p-3">
+                    <h4 class="fw-bold mb-3">Existing Staff</h4>
+
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Staff Details</th>
+                                    <th>Status</th>
+                                    <th>Photo Upload</th>
+                                    <th>Account</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for staff in staff_users %}
+                                    <tr>
+                                        <td>
+                                            {% if staff.staff_profile.photo %}
+                                                <img
+                                                    src="{{ staff.staff_profile.photo.url }}"
+                                                    alt="{{ staff.username }}"
+                                                    width="65"
+                                                    height="65"
+                                                    style="object-fit: cover; border-radius: 50%;"
+                                                >
+                                            {% else %}
+                                                <div
+                                                    class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                                    style="width:65px;height:65px;"
+                                                >
+                                                    <i class="bi bi-person fs-3"></i>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            <strong>
+                                                {{ staff.get_full_name|default:staff.username|escape }}
+                                            </strong>
+
+                                            <div class="small text-muted">
+                                                {{ staff.username|escape }}
+                                            </div>
+
+                                            <div class="small text-muted">
+                                                {{ staff.email|escape }}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            {% if staff.is_active %}
+                                                <span class="badge bg-success">
+                                                    Active
+                                                </span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">
+                                                    Disabled
+                                                </span>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            <form method="post"
+                                                  enctype="multipart/form-data">
+                                                {% csrf_token %}
+
+                                                <input type="hidden"
+                                                       name="action"
+                                                       value="photo">
+
+                                                <input type="hidden"
+                                                       name="user_id"
+                                                       value="{{ staff.id }}">
+
+                                                <input type="file"
+                                                       name="photo"
+                                                       accept="image/*"
+                                                       class="form-control form-control-sm mb-2"
+                                                       required>
+
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-gold">
+                                                    <i class="bi bi-upload me-1"></i>
+                                                    Upload Photo
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            <form method="post">
+                                                {% csrf_token %}
+
+                                                <input type="hidden"
+                                                       name="action"
+                                                       value="toggle">
+
+                                                <input type="hidden"
+                                                       name="user_id"
+                                                       value="{{ staff.id }}">
+
+                                                <button type="submit"
+                                                        class="btn btn-sm {% if staff.is_active %}btn-outline-danger{% else %}btn-outline-success{% endif %}">
+                                                    {% if staff.is_active %}
+                                                        Disable
+                                                    {% else %}
+                                                        Enable
+                                                    {% endif %}
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="5"
+                                            class="text-center py-4">
+                                            No staff accounts yet.
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

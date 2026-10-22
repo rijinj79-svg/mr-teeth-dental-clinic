@@ -1,0 +1,593 @@
+{% extends 'base.html' %}
+
+{% block title %}Finance | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="d-flex justify-content-between
+                    align-items-center flex-wrap
+                    gap-3 mb-4">
+
+            <div>
+
+                <div class="eyebrow">
+                    Clinic Accounts
+                </div>
+
+                <h1 class="section-title mt-2">
+                    Finance Dashboard
+                </h1>
+
+                <p class="small-muted mb-0">
+                    Daily income and expense management
+                </p>
+
+            </div>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="d-flex gap-2 flex-wrap">
+
+                <a href="{% url 'add_finance_income' %}"
+                   class="btn btn-warning">
+
+                    <i class="bi bi-plus-circle me-1"></i>
+                    Add Income
+
+                </a>
+
+
+                <a href="{% url 'add_finance_expense' %}"
+                   class="btn btn-outline-danger">
+
+                    <i class="bi bi-dash-circle me-1"></i>
+                    Add Expense
+
+                </a>
+
+
+                <a href="{% url 'finance_records' %}" class="btn btn-dark">
+                    <i class="bi bi-journal-text me-2"></i>
+                    View Finance Records
+                </a>
+
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= TODAY'S INCOME ================= -->
+
+        <div class="table-card mb-4">
+
+            <div class="card-body p-0">
+
+                <!-- INCOME HEADER -->
+
+                <div class="p-3 border-bottom">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center
+                                flex-wrap gap-2">
+
+                        <div>
+
+                            <h4 class="fw-bold mb-1">
+                                Today's Income
+                            </h4>
+
+                            <p class="small-muted mb-0">
+                                {{ today }}
+                            </p>
+
+                        </div>
+
+
+                        <span class="badge bg-success fs-6">
+
+                            â‚¹{{ today_income|floatformat:2 }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INCOME TABLE -->
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered
+                                  align-middle text-center mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Sl. No.
+                                </th>
+
+                                <th>
+                                    OP No.
+                                </th>
+
+                                <th>
+                                    Patient Name
+                                </th>
+
+                                <th>
+                                    Age / Sex
+                                </th>
+
+                                <th>
+                                    Dr. Name
+                                </th>
+
+                                <th>
+                                    Ph. No.
+                                </th>
+
+                                <th>
+                                    Procedure
+                                </th>
+
+                                <th>
+                                    Payment
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for income in income_entries %}
+
+                            <tr>
+
+                                <!-- SL. NO. -->
+
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+
+
+                                <!-- OP NO. -->
+
+                                <td>
+
+                                    {% if income.op_no %}
+
+                                        <strong>
+                                            {{ income.op_no }}
+                                        </strong>
+
+                                    {% else %}
+
+                                        <span class="text-muted">
+                                            â€”
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <!-- PATIENT NAME -->
+
+                                <td>
+
+                                    <strong>
+                                        {{ income.patient_name }}
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- AGE / GENDER -->
+
+                                <td>
+
+                                    {% if income.age %}
+                                        {{ income.age }}
+                                    {% else %}
+                                        â€”
+                                    {% endif %}
+
+                                    /
+
+                                    {% if income.gender %}
+                                        {{ income.gender }}
+                                    {% else %}
+                                        â€”
+                                    {% endif %}
+
+                                </td>
+
+
+                                <!-- DOCTOR -->
+
+                                <td>
+
+                                    {% if income.doctor_name %}
+
+                                        {{ income.doctor_name }}
+
+                                    {% else %}
+
+                                        <span class="text-muted">
+                                            â€”
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <!-- PHONE -->
+
+                                <td>
+
+                                    {% if income.phone %}
+
+                                        {{ income.phone }}
+
+                                    {% else %}
+
+                                        <span class="text-muted">
+                                            â€”
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <!-- PROCEDURE -->
+
+                                <td>
+
+                                    {{ income.procedure }}
+
+                                </td>
+
+
+                                <!-- PAYMENT METHOD -->
+
+                                <td>
+
+                                    <span class="badge bg-secondary">
+
+                                        {{ income.payment_method }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- AMOUNT -->
+
+                                <td>
+
+                                    <strong>
+                                        â‚¹{{ income.amount|floatformat:2 }}
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- ACTION -->
+
+                                <td>
+
+                                    <a href="{% url 'edit_finance_income' income.pk %}"
+                                       class="btn btn-sm btn-outline-primary">
+
+                                        <i class="bi bi-pencil-square me-1"></i>
+                                        Edit
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+
+                            {% empty %}
+
+                            <!-- NO INCOME -->
+
+                            <tr>
+
+                                <td colspan="10"
+                                    class="text-center py-5">
+
+                                    <i class="bi bi-receipt
+                                              fs-1 text-muted"></i>
+
+                                    <h5 class="fw-bold mt-3">
+                                        No income entries today
+                                    </h5>
+
+                                    <p class="text-muted mb-3">
+
+                                        No patient payments have
+                                        been recorded today.
+
+                                    </p>
+
+
+                                    <a href="{% url 'add_finance_income' %}"
+                                       class="btn btn-warning">
+
+                                        <i class="bi bi-plus-circle me-1"></i>
+
+                                        Add First Income
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FINANCE SUMMARY ================= -->
+
+        <div class="row g-4">
+
+
+            <!-- ================= EXPENSES ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="table-card h-100">
+
+                    <div class="card-body">
+
+
+                        <div class="d-flex
+                                    justify-content-between
+                                    align-items-center
+                                    mb-3">
+
+                            <h4 class="fw-bold mb-0">
+
+                                <i class="bi bi-wallet2 me-2"></i>
+
+                                Today's Expenses
+
+                            </h4>
+
+
+                            <span class="badge bg-danger">
+
+                                â‚¹{{ total_expense|floatformat:2 }}
+
+                            </span>
+
+                        </div>
+
+
+                        {% if expense_entries %}
+
+                            <div class="table-responsive">
+
+                                <table class="table
+                                              table-hover
+                                              align-middle mb-0">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>
+                                                Description
+                                            </th>
+
+                                            <th class="text-end">
+                                                Amount
+                                            </th>
+
+                                        </tr>
+
+                                    </thead>
+
+
+                                    <tbody>
+
+                                        {% for expense in expense_entries %}
+
+                                        <tr>
+
+                                            <td>
+                                                {{ expense.description }}
+                                            </td>
+
+                                            <td class="text-end">
+
+                                                â‚¹{{ expense.amount|floatformat:2 }}
+
+                                            </td>
+
+                                        </tr>
+
+                                        {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+
+                        {% else %}
+
+                            <div class="text-center py-4">
+
+                                <i class="bi bi-receipt
+                                          fs-2 text-muted"></i>
+
+                                <p class="text-muted mt-2 mb-0">
+
+                                    No expenses recorded today.
+
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SUMMARY CARDS ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="row g-4">
+
+
+                    <!-- TODAY'S INCOME -->
+
+                    <div class="col-12">
+
+                        <div class="stat-card">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <span>
+                                        Today's Income
+                                    </span>
+
+                                    <strong>
+                                        â‚¹{{ today_income|floatformat:2 }}
+                                    </strong>
+
+                                </div>
+
+
+                                <i class="bi bi-cash-stack fs-2"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TODAY'S EXPENSES -->
+
+                    <div class="col-12">
+
+                        <div class="stat-card">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <span>
+                                        Today's Expenses
+                                    </span>
+
+                                    <strong>
+                                        â‚¹{{ total_expense|floatformat:2 }}
+                                    </strong>
+
+                                </div>
+
+
+                                <i class="bi bi-wallet2 fs-2"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CASH IN HAND -->
+
+                    <div class="col-12">
+
+                        <div class="stat-card">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center">
+
+                                <div>
+
+                                    <span>
+                                        Cash In Hand
+                                    </span>
+
+                                    <strong>
+                                        â‚¹{{ cash_in_hand|floatformat:2 }}
+                                    </strong>
+
+                                </div>
+
+
+                                <i class="bi bi-wallet-fill fs-2"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Appointments | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+            <div>
+                <div class="eyebrow">Clinic Staff</div>
+                <h1 class="section-title mt-2">
+                    Manage appointments
+                </h1>
+            </div>
+
+            <!-- Status Filters -->
+            <div class="d-flex flex-wrap gap-2">
+
+                <a
+                    href="{% url 'staff_appointments' %}"
+                    class="btn btn-sm btn-outline-secondary"
+                >
+                    All
+                </a>
+
+                {% for key, label in statuses %}
+
+                <a
+                    href="?status={{ key }}"
+                    class="btn btn-sm btn-outline-primary"
+                >
+                    {{ label }}
+                </a>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Appointments Table -->
+        <div class="table-card">
+
+            <div class="table-responsive">
+
+                <table class="table align-middle mb-0">
+
+                    <thead>
+                        <tr>
+
+                            <th>Date / Time</th>
+
+                            <th>Patient</th>
+
+                            <th>Service</th>
+
+                            <th>Doctor</th>
+
+                            <th>Status</th>
+
+                            {% if user.is_superuser %}
+                                <th>Admin Actions</th>
+                            {% endif %}
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for a in appointments %}
+
+                        <tr>
+
+                            <!-- Date / Time -->
+                            <td>
+                                {{ a.appointment_date }}
+
+                                <br>
+
+                                <small>
+                                    {{ a.appointment_time|time:'g:i A' }}
+                                </small>
+                            </td>
+
+
+                            <!-- Patient -->
+                            <td>
+
+                                <strong>
+                                    {{ a.name }}
+                                </strong>
+
+                                <br>
+
+                                <small>
+                                    {{ a.phone }}
+
+                                    {% if a.email %}
+                                        · {{ a.email }}
+                                    {% endif %}
+                                </small>
+
+                            </td>
+
+
+                            <!-- Service -->
+                            <td>
+                                {{ a.service }}
+                            </td>
+
+
+                            <!-- Doctor -->
+                            <td>
+
+                                {% if a.doctor %}
+                                    {{ a.doctor.name }}
+                                {% else %}
+                                    Any available
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- Status -->
+                            <td>
+
+                                <form
+                                    method="post"
+                                    class="d-flex gap-2"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <input
+                                        type="hidden"
+                                        name="appointment_id"
+                                        value="{{ a.pk }}"
+                                    >
+
+                                    <select
+                                        name="status"
+                                        class="form-select form-select-sm"
+                                    >
+
+                                        <option
+                                            value="Pending"
+                                            {% if a.status == 'Pending' %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            Pending
+                                        </option>
+
+                                        <option
+                                            value="Confirmed"
+                                            {% if a.status == 'Confirmed' %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            Confirmed
+                                        </option>
+
+                                        <option
+                                            value="Completed"
+                                            {% if a.status == 'Completed' %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            Completed
+                                        </option>
+
+                                        <option
+                                            value="Cancelled"
+                                            {% if a.status == 'Cancelled' %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            Cancelled
+                                        </option>
+
+                                    </select>
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-gold"
+                                    >
+                                        Save
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+
+                            <!-- Admin Actions -->
+                            {% if user.is_superuser %}
+
+                            <td>
+
+                                <div class="d-flex flex-wrap gap-2">
+
+                                    <!-- Edit -->
+                                    <a
+                                        href="{% url 'admin_edit_appointment' a.pk %}"
+                                        class="btn btn-sm btn-outline-primary"
+                                    >
+                                        <i class="bi bi-pencil-square me-1"></i>
+                                        Edit
+                                    </a>
+
+
+                                    <!-- Delete -->
+                                    <a
+                                        href="{% url 'admin_delete_appointment' a.pk %}"
+                                        class="btn btn-sm btn-outline-danger"
+                                    >
+                                        <i class="bi bi-trash me-1"></i>
+                                        Delete
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                            {% endif %}
+
+                        </tr>
+
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td
+                                colspan="{% if user.is_superuser %}6{% else %}5{% endif %}"
+                                class="text-center py-5"
+                            >
+                                No appointments found.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

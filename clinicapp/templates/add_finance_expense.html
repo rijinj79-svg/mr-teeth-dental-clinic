@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Expense | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="mb-4">
+
+            <div class="eyebrow">
+                Clinic Accounts
+            </div>
+
+            <h1 class="section-title mt-2">
+                Add Expense
+            </h1>
+
+            <p class="small-muted mb-0">
+                Manually enter clinic expense details.
+            </p>
+
+        </div>
+
+
+        <!-- ================= EXPENSE FORM ================= -->
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body p-4">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- Form Errors -->
+
+                    {% if form.non_field_errors %}
+
+                        <div class="alert alert-danger">
+
+                            {{ form.non_field_errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="row g-3">
+
+
+                        <!-- Date -->
+
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Date
+                            </label>
+
+                            {{ form.expense_date }}
+
+                            {% for error in form.expense_date.errors %}
+
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Description -->
+
+                        <div class="col-md-8">
+
+                            <label class="form-label">
+                                Expense Description
+                            </label>
+
+                            {{ form.description }}
+
+                            {% for error in form.description.errors %}
+
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Amount -->
+
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Amount (₹)
+                            </label>
+
+                            {{ form.amount }}
+
+                            {% for error in form.amount.errors %}
+
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Notes -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Notes
+                            </label>
+
+                            {{ form.notes }}
+
+                            {% for error in form.notes.errors %}
+
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= BUTTONS ================= -->
+
+                    <div class="d-flex gap-2 mt-4">
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning">
+
+                            <i class="bi bi-save me-1"></i>
+
+                            Save Expense
+
+                        </button>
+
+
+                        <a
+                            href="{% url 'finance_dashboard' %}"
+                            class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

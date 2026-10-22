@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Income | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <div class="eyebrow">Clinic Accounts</div>
+
+            <h1 class="section-title mt-2">
+                Add Income Entry
+            </h1>
+
+            <p class="small-muted mb-0">
+                Manually enter today's patient payment details.
+            </p>
+        </div>
+
+
+        <!-- Finance Form Card -->
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body p-4">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- Display Form Errors -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+
+                    <div class="row g-3">
+
+
+                        <!-- Date -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Date
+                            </label>
+
+                            {{ form.payment_date }}
+
+                            {% for error in form.payment_date.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- OP Number -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                OP No.
+                            </label>
+
+                            {{ form.op_no }}
+
+                            {% for error in form.op_no.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Patient Name -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Patient Name
+                            </label>
+
+                            {{ form.patient_name }}
+
+                            {% for error in form.patient_name.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Age -->
+                        <div class="col-md-2">
+
+                            <label class="form-label">
+                                Age
+                            </label>
+
+                            {{ form.age }}
+
+                            {% for error in form.age.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Gender -->
+                        <div class="col-md-3">
+
+                            <label class="form-label">
+                                Gender
+                            </label>
+
+                            {{ form.gender }}
+
+                            {% for error in form.gender.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Doctor -->
+                        <div class="col-md-7">
+
+                            <label class="form-label">
+                                Doctor Name
+                            </label>
+
+                            {{ form.doctor_name }}
+
+                            {% for error in form.doctor_name.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Phone No.
+                            </label>
+
+                            {{ form.phone }}
+
+                            {% for error in form.phone.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Procedure -->
+                        <div class="col-md-8">
+
+                            <label class="form-label">
+                                Procedure / Treatment
+                            </label>
+
+                            {{ form.procedure }}
+
+                            {% for error in form.procedure.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Amount -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Amount (₹)
+                            </label>
+
+                            {{ form.amount }}
+
+                            {% for error in form.amount.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Payment Method -->
+                        <div class="col-md-4">
+
+                            <label class="form-label">
+                                Payment Method
+                            </label>
+
+                            {{ form.payment_method }}
+
+                            {% for error in form.payment_method.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- Notes -->
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Notes
+                            </label>
+
+                            {{ form.notes }}
+
+                            {% for error in form.notes.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2 mt-4">
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning"
+                        >
+                            <i class="bi bi-save me-1"></i>
+                            Save Income
+                        </button>
+
+
+                        <a
+                            href="{% url 'finance_dashboard' %}"
+                            class="btn btn-outline-secondary"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

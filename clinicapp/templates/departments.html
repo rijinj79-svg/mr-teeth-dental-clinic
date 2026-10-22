@@ -1,0 +1,245 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .departments-section {
+        background-color: #fffdf5;
+        min-height: 80vh;
+    }
+
+    .department-heading {
+        color: #212529;
+        font-weight: 800;
+    }
+
+    .department-subtitle {
+        color: #6c757d;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .department-card {
+        height: 100%;
+        background: #ffffff;
+        border: 1px solid #f0ead8;
+        border-radius: 18px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .department-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+    }
+
+    .department-image {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+    }
+
+    .department-icon-circle {
+        width: 82px;
+        height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        background-color: #fff3c4;
+        border: 2px solid #ffe082;
+        border-radius: 50%;
+    }
+
+    .department-icon-circle i {
+        color: #d49b00;
+        font-size: 2.4rem;
+    }
+
+    .department-name {
+        color: #212529;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .department-short-description {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    .department-label {
+        color: #343a40;
+        font-size: 0.95rem;
+        font-weight: 700;
+    }
+
+    .department-details {
+        color: #6c757d;
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    .department-button {
+        background-color: #ffc107;
+        border: 1px solid #ffc107;
+        color: #212529;
+        border-radius: 9px;
+        padding: 11px 16px;
+        font-weight: 700;
+        transition: background-color 0.2s ease;
+    }
+
+    .department-button:hover {
+        background-color: #e0a800;
+        border-color: #e0a800;
+        color: #212529;
+    }
+
+    .department-button:focus-visible {
+        outline: 3px solid #212529;
+        outline-offset: 3px;
+    }
+
+    .department-empty {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 45px 20px;
+    }
+</style>
+
+<section class="departments-section py-5">
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="text-center mb-5">
+            <span class="badge rounded-pill text-dark px-3 py-2 mb-3"
+                  style="background-color: #ffe082;">
+                OUR EXPERTISE
+            </span>
+
+            <h1 class="department-heading display-5 mb-3">
+                Departments &amp; Specialities
+            </h1>
+
+            <p class="department-subtitle">
+                Discover the dental services available at
+                Mr.Teeth Multispeciality Dental Clinic.
+                Our departments focus on helping you maintain
+                a healthy, confident smile.
+            </p>
+        </div>
+
+        <!-- Department Cards -->
+        <div class="row g-4">
+
+            {% for department in departments %}
+
+            <div class="col-sm-6 col-lg-4">
+
+                <article class="department-card d-flex flex-column">
+
+                    <!-- Optional Department Image -->
+                    {% if department.image_url %}
+                    <img
+                        src="{{ department.image_url }}"
+                        class="department-image"
+                        alt="{{ department.name }}"
+                        loading="lazy"
+                    >
+                    {% endif %}
+
+                    <div class="card-body p-4 d-flex flex-column">
+
+                        <!-- Department Icon -->
+                        <div class="department-icon-circle"
+                             aria-hidden="true">
+                            <i class="bi {{ department.icon|default:'bi-tooth' }}"></i>
+                        </div>
+
+                        <!-- Department Name -->
+                        <h2 class="department-name text-center mb-2">
+                            {{ department.name }}
+                        </h2>
+
+                        <!-- Short Description -->
+                        {% if department.short_description %}
+                        <p class="department-short-description text-center mb-3">
+                            {{ department.short_description }}
+                        </p>
+                        {% endif %}
+
+                        <hr class="my-3">
+
+                        <!-- Specialities -->
+                        {% if department.specialities %}
+                        <div class="mb-3">
+                            <h3 class="department-label">
+                                <i class="bi bi-check-circle-fill text-warning me-2"
+                                   aria-hidden="true"></i>
+                                Specialities
+                            </h3>
+
+                            <p class="department-details mb-0">
+                                {{ department.specialities|linebreaksbr }}
+                            </p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Treatments -->
+                        {% if department.treatments %}
+                        <div class="mb-4">
+                            <h3 class="department-label">
+                                <i class="bi bi-clipboard2-pulse text-warning me-2"
+                                   aria-hidden="true"></i>
+                                Treatments
+                            </h3>
+
+                            <p class="department-details mb-0">
+                                {{ department.treatments|linebreaksbr }}
+                            </p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Appointment Button -->
+                        <div class="mt-auto pt-3">
+                            <a href="{% url 'appoint' %}"
+                               class="btn department-button w-100">
+                                Book Appointment
+                                <i class="bi bi-arrow-right ms-2"
+                                   aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </article>
+
+            </div>
+
+            {% empty %}
+
+            <!-- Displayed when no active departments exist -->
+            <div class="col-12">
+                <div class="department-empty text-center shadow-sm">
+                    <i class="bi bi-hospital text-warning"
+                       style="font-size: 3rem;"
+                       aria-hidden="true"></i>
+
+                    <h2 class="h4 fw-bold mt-3">
+                        Departments Coming Soon
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Our department information will be available soon.
+                        Please check back later.
+                    </p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

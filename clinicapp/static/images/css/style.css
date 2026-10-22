@@ -1,0 +1,446 @@
+/* Site-wide typography. Bootstrap Icons keep their own icon font. */
+html, body, body *:not(.bi):not([class^="bi-"]):not([class*=" bi-"]) {
+    font-family: "High Tower Text", "High Tower Text MT", serif !important;
+}
+/* =====================================================
+   MR.TEETH MODERN NAVBAR
+===================================================== */
+
+.mrteeth-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+    padding: 10px 0;
+}
+
+
+/* BRAND */
+
+.mrteeth-brand {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.brand-mr {
+    color: #222;
+}
+
+.brand-teeth {
+    color: #f4b400;
+}
+
+.brand-subtitle {
+    margin-left: 8px;
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #777;
+}
+
+
+/* NAVIGATION LINKS */
+
+.modern-nav-link {
+    position: relative;
+    color: #333 !important;
+    font-weight: 500;
+    padding: 10px 13px !important;
+    transition: all 0.25s ease;
+}
+
+.modern-nav-link:hover {
+    color: #e5a900 !important;
+}
+
+
+/* GOLD UNDERLINE */
+
+.modern-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 4px;
+    height: 2px;
+    background: #f4b400;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.modern-nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* LOGIN BUTTON */
+
+.login-nav-btn {
+    background: #222;
+    color: #fff !important;
+    border-radius: 25px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.login-nav-btn:hover {
+    background: #f4b400;
+    color: #222 !important;
+}
+
+
+/* APPOINTMENT BUTTON */
+
+.appointment-nav-btn {
+    background: #f4b400;
+    color: #222 !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.appointment-nav-btn:hover {
+    background: #222;
+    color: #fff !important;
+}
+
+
+/* ADMIN BUTTON */
+
+.admin-nav-btn {
+    background: #222;
+    color: #fff !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 600;
+}
+
+.admin-nav-btn:hover {
+    background: #f4b400;
+    color: #222 !important;
+}
+
+
+/* STAFF BUTTON */
+
+.staff-nav-btn {
+    background: #f4b400;
+    color: #222 !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 600;
+}
+
+.staff-nav-btn:hover {
+    background: #222;
+    color: #fff !important;
+}
+
+
+/* LOGOUT */
+
+.logout-link {
+    color: #555 !important;
+    font-weight: 500;
+    padding: 10px 13px !important;
+}
+
+.logout-link:hover {
+    color: #dc3545 !important;
+}
+
+
+/* DROPDOWN */
+
+.modern-dropdown {
+    border: none;
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.modern-dropdown .dropdown-item {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 500;
+}
+
+.modern-dropdown .dropdown-item:hover {
+    background: #fff4cf;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 991px) {
+
+    .mrteeth-navbar {
+        padding: 8px 0;
+    }
+
+    .mrteeth-brand {
+        font-size: 25px;
+    }
+
+    .brand-subtitle {
+        font-size: 8px;
+    }
+
+    .navbar-nav {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .modern-nav-link::after {
+        display: none;
+    }
+
+    .login-nav-btn,
+    .appointment-nav-btn,
+    .admin-nav-btn,
+    .staff-nav-btn {
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+}
+/* =====================================================
+   MR.TEETH MODERN NAVBAR
+===================================================== */
+
+.mrteeth-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+    padding: 10px 0;
+}
+
+.mrteeth-brand {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.brand-mr {
+    color: #222;
+}
+
+.brand-teeth {
+    color: #f4b400;
+}
+
+.brand-subtitle {
+    margin-left: 8px;
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.modern-nav-link {
+    position: relative;
+    color: #333 !important;
+    font-weight: 500;
+    padding: 10px 13px !important;
+    transition: all 0.25s ease;
+}
+
+.modern-nav-link:hover {
+    color: #e5a900 !important;
+}
+
+.modern-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 4px;
+    height: 2px;
+    background: #f4b400;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.modern-nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.login-nav-btn {
+    background: #222;
+    color: #fff !important;
+    border-radius: 25px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.login-nav-btn:hover {
+    background: #f4b400;
+    color: #222 !important;
+}
+
+.appointment-nav-btn {
+    background: #f4b400;
+    color: #222 !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.appointment-nav-btn:hover {
+    background: #222;
+    color: #fff !important;
+}
+
+.admin-nav-btn {
+    background: #222;
+    color: #fff !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 600;
+}
+
+.admin-nav-btn:hover {
+    background: #f4b400;
+    color: #222 !important;
+}
+
+.staff-nav-btn {
+    background: #f4b400;
+    color: #222 !important;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-weight: 600;
+}
+
+.staff-nav-btn:hover {
+    background: #222;
+    color: #fff !important;
+}
+
+.logout-link {
+    color: #555 !important;
+    font-weight: 500;
+    padding: 10px 13px !important;
+}
+
+.logout-link:hover {
+    color: #dc3545 !important;
+}
+
+.modern-dropdown {
+    border: none;
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.modern-dropdown .dropdown-item {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 500;
+}
+
+.modern-dropdown .dropdown-item:hover {
+    background: #fff4cf;
+}
+
+@media (max-width: 991px) {
+
+    .mrteeth-navbar {
+        padding: 8px 0;
+    }
+
+    .mrteeth-brand {
+        font-size: 25px;
+    }
+
+    .brand-subtitle {
+        font-size: 8px;
+    }
+
+    .navbar-nav {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .modern-nav-link::after {
+        display: none;
+    }
+
+    .login-nav-btn,
+    .appointment-nav-btn,
+    .admin-nav-btn,
+    .staff-nav-btn {
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+/* Restore the old Mr.Teeth navbar design */
+
+.mrteeth-navbar {
+    background: #FFD54F !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    padding: 10px 0 !important;
+}
+
+.mrteeth-brand {
+    display: block !important;
+    margin: 0 auto !important;
+    color: #000 !important;
+    font-family: Georgia, serif !important;
+    font-size: 28px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-align: center !important;
+}
+@media (min-width: 992px) {
+    .nav-menu-shift {
+        margin-right: 20px;
+    }
+}
+/* Doctor cards and responsive images */
+.doctor-card {
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.doctor-img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+/* Smaller images on mobile screens */
+@media (max-width: 576px) {
+    .doctor-img {
+        height: 210px;
+    }
+}

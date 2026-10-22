@@ -1,0 +1,260 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <div class="eyebrow text-warning mb-3">
+                    Multispeciality Dental Clinic
+                </div>
+
+                <h1>
+                    Your smile <span>begins here.</span>
+                </h1>
+
+                <p class="lead mt-4">
+                    Comfortable, compassionate and modern dental care
+                    for you and your family. Let our experienced team
+                    help you keep your smile healthy and confident.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+
+                    <a href="{% url 'appoint' %}"
+                       class="btn btn-gold btn-lg">
+                        Book an Appointment
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                    <a href="{% url 'depart' %}"
+                       class="btn btn-outline-light2 btn-lg">
+                        Explore Services
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY MR.TEETH ================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <div class="eyebrow">
+                Why Mr.Teeth?
+            </div>
+
+            <h2 class="section-title mt-2">
+                Care designed around you
+            </h2>
+
+            <p class="section-copy mx-auto">
+                From routine cleaning to restorative treatment,
+                we focus on clear communication, gentle care and
+                a comfortable patient experience.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-card p-4">
+
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                    <h5 class="fw-bold">
+                        Experienced dentists
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        Professional dental care with attention
+                        to your individual needs.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card p-4">
+
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-heart-pulse"></i>
+                    </div>
+
+                    <h5 class="fw-bold">
+                        Comfort-first care
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        A calm clinic environment designed to
+                        make every visit easier.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card p-4">
+
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+
+                    <h5 class="fw-bold">
+                        Affordable treatment
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        Quality dental services with transparent,
+                        practical treatment options.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MEET OUR DOCTORS ================= -->
+<section class="section pt-0">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">Meet our team</div>
+            <h2 class="section-title mt-2">Our dental professionals</h2>
+            <p class="section-copy mx-auto">Meet the team caring for your smile.</p>
+        </div>
+        <div class="row g-4">
+            {% for doctor in doctors %}
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="doctor-card h-100 overflow-hidden">
+                    {% if doctor.photo %}
+                    <img src="{{ doctor.photo.url }}" class="doctor-img w-100" alt="{{ doctor.name|escape }}" loading="lazy">
+                    {% else %}
+                    <img src="{% static 'images/' %}{{ doctor.image|default:'doctor.png' }}" class="doctor-img w-100" alt="{{ doctor.name|escape }}" loading="lazy">
+                    {% endif %}
+                    <div class="p-4">
+                        <h5 class="fw-bold mb-1">{{ doctor.name|escape }}</h5>
+                        <div class="text-warning fw-semibold">{{ doctor.designation|escape }}</div>
+                        {% if doctor.qualification %}<p class="small-muted mt-2 mb-1">{{ doctor.qualification|escape }}</p>{% endif %}
+                        {% if doctor.bio %}<p class="text-secondary mb-0">{{ doctor.bio|escape|truncatechars:140 }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12"><div class="feature-card p-4 text-center">Doctor profiles will be displayed here once the administrator adds them.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ================= PUBLIC FEEDBACK ================= -->
+<section class="section" id="feedback">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-5">
+                <div class="eyebrow">Patient feedback</div>
+                <h2 class="section-title mt-2">Your experience matters</h2>
+                <p class="section-copy">Visited Mr.Teeth? Share your experience. You do not need to log in. Feedback is reviewed by the clinic before appearing publicly.</p>
+                <div class="form-card mt-4">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-chat-square-heart me-2"></i>Leave feedback</h5>
+                    <form method="post" action="{% url 'submit_feedback' %}">
+                        {% csrf_token %}
+                        <div class="mb-3"><label class="form-label" for="{{ feedback_form.name.id_for_label }}">Name</label>{{ feedback_form.name }}{{ feedback_form.name.errors }}</div>
+                        <div class="mb-3"><label class="form-label" for="{{ feedback_form.rating.id_for_label }}">Rating</label>{{ feedback_form.rating }}{{ feedback_form.rating.errors }}</div>
+                        <div class="mb-3"><label class="form-label" for="{{ feedback_form.message.id_for_label }}">Your feedback</label>{{ feedback_form.message }}{{ feedback_form.message.errors }}</div>
+                        <button class="btn btn-gold" type="submit"><i class="bi bi-send me-1"></i> Submit feedback</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <h3 class="fw-bold mb-3">What visitors say</h3>
+                {% if approved_feedback %}
+                    <div class="row g-3">
+                    {% for item in approved_feedback %}
+                        <div class="col-md-6">
+                            <div class="feature-card p-4">
+                                <div class="text-warning mb-2" aria-label="{{ item.rating }} out of 5 stars">
+                                    {% for star in "12345" %}{% if forloop.counter <= item.rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}
+                                </div>
+                                <p class="mb-3">“{{ item.message|truncatechars:240 }}”</p>
+                                <strong>{{ item.name|escape }}</strong>
+                                <div class="small-muted">Verified by clinic moderation</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="feature-card p-4"><i class="bi bi-chat-square-text fs-2 text-warning"></i><p class="mb-0 mt-3">No public feedback yet. You can be the first to share your experience.</p></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= APPOINTMENT CALL TO ACTION ================= -->
+
+<section class="section bg-white">
+
+    <div class="container text-center">
+
+        <div class="eyebrow">
+            Ready when you are
+        </div>
+
+        <h2 class="section-title mt-2">
+            Take the first step toward a healthier smile
+        </h2>
+
+        <p class="section-copy mx-auto mb-4">
+            Request an appointment online and our team will
+            review your preferred date and time.
+        </p>
+
+        <a href="{% url 'appoint' %}"
+           class="btn btn-gold btn-lg">
+            Book Appointment
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

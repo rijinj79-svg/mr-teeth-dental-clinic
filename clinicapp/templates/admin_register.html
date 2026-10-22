@@ -1,0 +1,360 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Registration | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6 col-md-8">
+
+                <!-- ================= HEADER ================= -->
+
+                <div class="text-center mb-4">
+
+                    <div class="eyebrow">
+                        Mr.Teeth Administration
+                    </div>
+
+                    <h1 class="section-title mt-2">
+                        Admin Registration
+                    </h1>
+
+                    <p class="small-muted">
+                        Create a secure administrator account
+                    </p>
+
+                </div>
+
+
+                <!-- ================= REGISTRATION CARD ================= -->
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body p-4 p-md-5">
+
+
+                        <!-- ================= ICON ================= -->
+
+                        <div class="text-center mb-4">
+
+                            <div class="d-inline-flex
+                                        align-items-center
+                                        justify-content-center
+                                        rounded-circle
+                                        bg-warning
+                                        text-dark"
+                                 style="
+                                     width: 70px;
+                                     height: 70px;
+                                 ">
+
+                                <i class="bi bi-shield-lock-fill fs-2"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= MESSAGES ================= -->
+
+                        {% if messages %}
+
+                            {% for message in messages %}
+
+                                <div class="alert
+                                    {% if message.tags %}
+                                        alert-{{ message.tags }}
+                                    {% else %}
+                                        alert-info
+                                    {% endif %}
+                                    alert-dismissible fade show">
+
+                                    {{ message }}
+
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert">
+                                    </button>
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% endif %}
+
+
+                        <!-- ================= FORM ================= -->
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+
+                            <!-- USERNAME -->
+
+                            <div class="mb-3">
+
+                                <label for="username"
+                                       class="form-label fw-semibold">
+
+                                    Username
+
+                                </label>
+
+                                <input type="text"
+                                       name="username"
+                                       id="username"
+                                       class="form-control"
+                                       placeholder="Enter admin username"
+                                       autocomplete="username"
+                                       required>
+
+                            </div>
+
+
+                            <!-- EMAIL -->
+
+                            <div class="mb-3">
+
+                                <label for="email"
+                                       class="form-label fw-semibold">
+
+                                    Email Address
+
+                                </label>
+
+                                <input type="email"
+                                       name="email"
+                                       id="email"
+                                       class="form-control"
+                                       placeholder="Enter admin email"
+                                       autocomplete="email"
+                                       required>
+
+                            </div>
+
+
+                            <!-- PASSWORD -->
+
+                            <div class="mb-3">
+
+                                <label for="password"
+                                       class="form-label fw-semibold">
+
+                                    Password
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input type="password"
+                                           name="password"
+                                           id="password"
+                                           class="form-control"
+                                           placeholder="Create password"
+                                           autocomplete="new-password"
+                                           required>
+
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            onclick="togglePassword(
+                                                'password',
+                                                'passwordIcon'
+                                            )">
+
+                                        <i id="passwordIcon"
+                                           class="bi bi-eye">
+                                        </i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CONFIRM PASSWORD -->
+
+                            <div class="mb-4">
+
+                                <label for="confirm_password"
+                                       class="form-label fw-semibold">
+
+                                    Confirm Password
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input type="password"
+                                           name="confirm_password"
+                                           id="confirm_password"
+                                           class="form-control"
+                                           placeholder="Confirm password"
+                                           autocomplete="new-password"
+                                           required>
+
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            onclick="togglePassword(
+                                                'confirm_password',
+                                                'confirmPasswordIcon'
+                                            )">
+
+                                        <i id="confirmPasswordIcon"
+                                           class="bi bi-eye">
+                                        </i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- SECURITY NOTICE -->
+
+                            <div class="alert alert-warning">
+
+                                <div class="d-flex">
+
+                                    <i class="bi bi-shield-lock-fill
+                                              me-2 mt-1"></i>
+
+                                    <div>
+
+                                        <strong>
+                                            Administrator Access
+                                        </strong>
+
+                                        <p class="mb-0 small mt-1">
+
+                                            This account will have full
+                                            administrative access to the
+                                            Mr.Teeth management system.
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- REGISTER BUTTON -->
+
+                            <button type="submit"
+                                    class="btn btn-warning w-100 py-2">
+
+                                <i class="bi bi-person-plus-fill me-1"></i>
+
+                                Create Admin Account
+
+                            </button>
+
+
+                        </form>
+
+
+                        <!-- ================= LOGIN LINK ================= -->
+
+                        <div class="text-center mt-4">
+
+                            <p class="small-muted mb-0">
+
+                                Already have an admin account?
+
+                                <a href="{% url 'admin_login' %}"
+                                   class="fw-semibold text-decoration-none">
+
+                                    Admin Login
+
+                                </a>
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- ================= BACK LINK ================= -->
+
+                        <div class="text-center mt-3">
+
+                            <a href="{% url 'home' %}"
+                               class="small text-muted
+                                      text-decoration-none">
+
+                                <i class="bi bi-arrow-left me-1"></i>
+
+                                Back to Website
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PASSWORD TOGGLE ================= -->
+
+<script>
+
+function togglePassword(
+    fieldId,
+    iconId
+) {
+
+    const field =
+        document.getElementById(fieldId);
+
+    const icon =
+        document.getElementById(iconId);
+
+
+    if (field.type === "password") {
+
+        field.type = "text";
+
+        icon.classList.remove(
+            "bi-eye"
+        );
+
+        icon.classList.add(
+            "bi-eye-slash"
+        );
+
+    } else {
+
+        field.type = "password";
+
+        icon.classList.remove(
+            "bi-eye-slash"
+        );
+
+        icon.classList.add(
+            "bi-eye"
+        );
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,157 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services & Doctors | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container">
+        <div class="eyebrow text-warning">Dental Services</div>
+        <h1 class="display-4 mt-2">Complete care for your smile</h1>
+        <p class="lead mb-0">
+            Explore our core services and meet the team behind Mr.Teeth.
+        </p>
+    </div>
+</section>
+
+<!-- DENTAL SERVICES -->
+<section class="section">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card overflow-hidden">
+                    <img class="service-img w-100"
+                         src="{% static 'images/cleaning.png' %}"
+                         alt="Teeth cleaning">
+                    <div class="p-4">
+                        <h5 class="fw-bold">Teeth Cleaning</h5>
+                        <p class="text-secondary mb-0">
+                            Professional cleaning to support healthy teeth and gums.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card overflow-hidden">
+                    <img class="service-img w-100"
+                         src="{% static 'images/whitening.png' %}"
+                         alt="Teeth whitening">
+                    <div class="p-4">
+                        <h5 class="fw-bold">Teeth Whitening</h5>
+                        <p class="text-secondary mb-0">
+                            A brighter, more confident smile with professional care.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card overflow-hidden">
+                    <img class="service-img w-100"
+                         src="{% static 'images/rootcanal.png' %}"
+                         alt="Root canal treatment">
+                    <div class="p-4">
+                        <h5 class="fw-bold">Root Canal</h5>
+                        <p class="text-secondary mb-0">
+                            Treatment focused on relieving pain and preserving your tooth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card overflow-hidden">
+                    <img class="service-img w-100"
+                         src="{% static 'images/dental1.jpg' %}"
+                         alt="General dentistry">
+                    <div class="p-4">
+                        <h5 class="fw-bold">General Dentistry</h5>
+                        <p class="text-secondary mb-0">
+                            Routine consultations and dental care for the whole family.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="section pt-0">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="eyebrow">Our doctors</div>
+            <h2 class="section-title mt-2">Meet the team</h2>
+        </div>
+
+        <div class="row justify-content-center g-4">
+
+            {% for doctor in doctors %}
+                <div class="col-md-6 col-lg-5">
+                    <div class="doctor-card overflow-hidden">
+
+                        {% if doctor.photo %}
+                            <img
+                                class="doctor-img w-100"
+                                src="{{ doctor.photo.url }}"
+                                alt="{{ doctor.name }}"
+                            >
+                        {% elif doctor.image %}
+                            <img
+                                class="doctor-img w-100"
+                                src="{% static 'images/' %}{{ doctor.image }}"
+                                alt="{{ doctor.name }}"
+                            >
+                        {% else %}
+                            <img
+                                class="doctor-img w-100"
+                                src="{% static 'images/doctor.png' %}"
+                                alt="{{ doctor.name }}"
+                            >
+                        {% endif %}
+
+                        <div class="p-4">
+                            <h4 class="fw-bold mb-1">
+                                {{ doctor.name }}
+                            </h4>
+
+                            <p class="text-warning fw-semibold">
+                                {{ doctor.designation }}
+                            </p>
+
+                            {% if doctor.qualification %}
+                                <p class="text-secondary">
+                                    {{ doctor.qualification }}
+                                </p>
+                            {% endif %}
+
+                            {% if doctor.bio %}
+                                <p class="text-secondary mb-0">
+                                    {{ doctor.bio }}
+                                </p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p class="text-secondary">
+                        Our doctor profiles will be available soon.
+                    </p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Gallery | Mr.Teeth{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><div class="eyebrow text-warning">Our Gallery</div><h1 class="display-4 mt-2">Inside Mr.Teeth</h1><p class="lead mb-0">A glimpse of our clinic, team and patient-focused environment.</p></div></section>
+<section class="section"><div class="container">
+    <h2 class="section-title mb-4">Clinic Photos</h2>
+    <div class="row g-4 mb-5">
+        {% for image in gallery_images %}<div class="col-sm-6 col-lg-4"><img src="{% static 'images/' %}{{ image }}" class="gallery-img" alt="Mr.Teeth clinic gallery image" loading="lazy"></div>{% endfor %}
+        {% for item in uploaded_images %}<div class="col-sm-6 col-lg-4"><img src="{{ item.image.url }}" class="gallery-img" alt="{{ item.title|escape }}" loading="lazy"><h5 class="mt-2">{{ item.title|escape }}</h5>{% if item.description %}<p class="small-muted">{{ item.description|escape }}</p>{% endif %}</div>{% endfor %}
+    </div>
+    {% if uploaded_videos %}<h2 class="section-title mb-4">Clinic Videos</h2><div class="row g-4">{% for item in uploaded_videos %}<div class="col-lg-6"><div class="feature-card p-3 h-100"><video class="w-100 rounded-3" controls preload="metadata"><source src="{{ item.video.url }}">Your browser does not support HTML video.</video><h5 class="mt-3">{{ item.title|escape }}</h5>{% if item.description %}<p class="small-muted mb-0">{{ item.description|escape }}</p>{% endif %}</div></div>{% endfor %}</div>{% endif %}
+</div></section>
+{% endblock %}

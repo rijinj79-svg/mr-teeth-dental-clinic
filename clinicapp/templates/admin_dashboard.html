@@ -1,0 +1,320 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <!-- ADMIN HEADER -->
+        <div class="text-center mb-5">
+            <div class="eyebrow">Administrator</div>
+
+            <h1 class="section-title mt-2">
+                Admin Dashboard
+            </h1>
+
+            <p class="section-copy mx-auto">
+                Welcome,
+                {{ request.user.first_name|default:request.user.username }}.
+                Manage the Mr.Teeth clinic system from one place.
+            </p>
+        </div>
+
+        <!-- MANAGEMENT CARDS -->
+        <div class="row g-4">
+
+            <!-- APPOINTMENTS -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+                    <h5 class="fw-bold">Appointments</h5>
+                    <p class="text-secondary">
+                        View and manage patient appointments,
+                        including confirmation, cancellation
+                        and completion.
+                    </p>
+                    <a href="{% url 'staff_appointments' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-arrow-right me-1"></i>
+                        Manage Appointments
+                    </a>
+                </div>
+            </div>
+
+            <!-- ENQUIRIES -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-chat-left-text"></i>
+                    </div>
+                    <h5 class="fw-bold">Enquiries</h5>
+                    <p class="text-secondary">
+                        View messages and enquiries submitted
+                        by patients through the clinic website.
+                    </p>
+                    <a href="{% url 'staff_messages' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-arrow-right me-1"></i>
+                        View Enquiries
+                    </a>
+                </div>
+            </div>
+
+            <!-- PATIENT RECORDS -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-person-vcard"></i>
+                    </div>
+                    <h5 class="fw-bold">Patient Records</h5>
+                    <p class="text-secondary">
+                        Search and manage patient records,
+                        OP numbers and patient information.
+                    </p>
+                    <a href="{% url 'patient_records' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-arrow-right me-1"></i>
+                        Patient Records
+                    </a>
+                </div>
+            </div>
+
+            <!-- FINANCE -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+                    <h5 class="fw-bold">Finance Management</h5>
+                    <p class="text-secondary">
+                        Review clinic income and expenses
+                        and manage financial records.
+                    </p>
+                    <a href="{% url 'finance_dashboard' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-arrow-right me-1"></i>
+                        Manage Finance
+                    </a>
+                </div>
+            </div>
+
+            <!-- GALLERY -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-images"></i>
+                    </div>
+                    <h5 class="fw-bold">Gallery Management</h5>
+                    <p class="text-secondary">
+                        Add and manage clinic images that
+                        appear on the public Gallery page.
+                    </p>
+                    <a href="{% url 'admin_gallery_media' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-upload me-1"></i>
+                        Manage Gallery
+                    </a>
+                </div>
+            </div>
+
+            <!-- VIDEOS -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-camera-video"></i>
+                    </div>
+                    <h5 class="fw-bold">Video Management</h5>
+                    <p class="text-secondary">
+                        Add and manage clinic videos for
+                        the public website.
+                    </p>
+                    <a href="{% url 'admin_gallery_media' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-camera-video me-1"></i>
+                        Manage Videos
+                    </a>
+                </div>
+            </div>
+
+            <!-- DOCTOR PROFILES -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-person-heart"></i>
+                    </div>
+                    <h5 class="fw-bold">Doctor Profiles</h5>
+                    <p class="text-secondary">
+                        Manage doctor profiles, photos, names,
+                        qualifications and specializations.
+                    </p>
+                    <a href="{% url 'admin_doctors' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-person-lines-fill me-1"></i>
+                        Manage Doctors
+                    </a>
+                </div>
+            </div>
+
+            <!-- DEPARTMENT MANAGEMENT -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-hospital"></i>
+                    </div>
+                    <h5 class="fw-bold">Department Management</h5>
+                    <p class="text-secondary">
+                        Add, edit and manage clinic departments,
+                        specialities, treatments, descriptions
+                        and their visibility on the website.
+                    </p>
+                    <a href="{% url 'admin_departments' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-building-gear me-1"></i>
+                        Manage Departments
+                    </a>
+                </div>
+            </div>
+
+            <!-- STAFF ACCOUNTS -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-person-gear"></i>
+                    </div>
+                    <h5 class="fw-bold">Staff Accounts</h5>
+                    <p class="text-secondary">
+                        Create staff accounts and activate
+                        or deactivate existing accounts.
+                    </p>
+                    <a href="{% url 'admin_staff' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-people me-1"></i>
+                        Manage Staff
+                    </a>
+                </div>
+            </div>
+
+            <!-- VISITOR FEEDBACK -->
+            <div class="col-md-6 col-xl-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-4">
+                        <i class="bi bi-chat-square-heart"></i>
+                    </div>
+                    <h5 class="fw-bold">Visitor Feedback</h5>
+                    <p class="text-secondary">
+                        Review visitor submissions and approve
+                        feedback before it appears publicly.
+                    </p>
+                    <a href="{% url 'admin_feedback' %}"
+                       class="btn btn-gold">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Moderate Feedback
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ADMINISTRATOR INFORMATION -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="text-center p-4 rounded-4 bg-white shadow-sm">
+                    <i class="bi bi-shield-check fs-1 text-warning"></i>
+
+                    <h5 class="fw-bold mt-3">
+                        Administrator Access
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        This dashboard is restricted to authorized
+                        administrators. Staff and patient accounts
+                        cannot access administrator functions.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+<!-- ACTION BUTTONS -->
+<div class="d-flex flex-wrap justify-content-center
+            align-items-center gap-2 mt-5">
+
+    <a href="{% url 'home' %}"
+       class="btn btn-outline-secondary">
+        <i class="bi bi-house me-1"></i>
+        Back to Home
+    </a>
+
+    <button type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#adminLogoutModal">
+        <i class="bi bi-box-arrow-right me-1"></i>
+        Logout
+    </button>
+
+</div>
+
+<!-- ADMIN LOGOUT CONFIRMATION MODAL -->
+<div class="modal fade"
+     id="adminLogoutModal"
+     tabindex="-1"
+     aria-labelledby="adminLogoutModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow">
+
+            <div class="modal-body text-center p-4">
+
+                <div class="mb-3 text-danger">
+                    <i class="bi bi-box-arrow-right"
+                       style="font-size: 3rem;"></i>
+                </div>
+
+                <h4 class="fw-bold"
+                    id="adminLogoutModalLabel">
+                    Confirm Logout
+                </h4>
+
+                <p class="text-secondary mt-3">
+                    Are you sure you want to log out
+                    of the Mr.Teeth admin dashboard?
+                </p>
+
+                <div class="d-flex justify-content-center
+                            gap-2 mt-4">
+
+                    <button type="button"
+                            class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <form method="post"
+                          action="{% url 'admin_logout' %}"
+                          class="m-0">
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                class="btn btn-danger">
+                            <i class="bi bi-box-arrow-right me-1"></i>
+                            Yes, Log Out
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+{% endblock %}

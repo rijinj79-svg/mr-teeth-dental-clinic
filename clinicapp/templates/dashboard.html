@@ -1,0 +1,147 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Patient Dashboard | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <!-- Dashboard heading -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <div class="eyebrow">Patient Portal</div>
+
+                <h1 class="section-title mt-2 mb-1">
+                    Hello, {{ request.user.first_name|default:request.user.username }}
+                </h1>
+
+                <p class="small-muted mb-0">
+                    Manage your appointments and clinic visits.
+                </p>
+            </div>
+
+            <a href="{% url 'appoint' %}" class="btn btn-gold">
+                <i class="bi bi-calendar-plus me-1"></i>
+                Book Appointment
+            </a>
+        </div>
+
+        <!-- Dashboard statistics -->
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Upcoming</span>
+                    <strong>{{ upcoming }}</strong>
+                    <small>appointments</small>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Total</span>
+                    <strong>{{ appointments.count }}</strong>
+                    <small>appointment requests</small>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Account</span>
+                    <strong>
+                        <i class="bi bi-check-circle"></i>
+                    </strong>
+                    <small>active patient</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Appointment history heading -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="fw-bold mb-0">Recent appointments</h3>
+
+            <a href="{% url 'my_appointments' %}">
+                View all
+            </a>
+        </div>
+
+        <!-- Appointment table -->
+        <div class="table-card">
+
+            {% if appointments %}
+
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Service</th>
+                                <th>Doctor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for a in appointments %}
+                                <tr>
+                                    <td>
+                                        {{ a.appointment_date|date:"d M Y" }}
+                                    </td>
+
+                                    <td>
+                                        {{ a.appointment_time|time:"g:i A" }}
+                                    </td>
+
+                                    <td>
+                                        {{ a.service }}
+                                    </td>
+
+                                    <td>
+                                        {% if a.doctor %}
+                                            {{ a.doctor.name }}
+                                        {% else %}
+                                            Any available
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        <span class="status-pill status-{{ a.status|lower }}">
+                                            {{ a.status }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+
+            {% else %}
+
+                <div class="p-5 text-center">
+                    <i class="bi bi-calendar2-x display-5 text-secondary"></i>
+
+                    <h5 class="mt-3">No appointments yet</h5>
+
+                    <p class="small-muted">
+                        Book your first visit when you're ready.
+                    </p>
+
+                    <a href="{% url 'appoint' %}" class="btn btn-gold">
+                        Book Your First Appointment
+                    </a>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

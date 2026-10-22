@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Add Patient | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-warning text-dark py-3">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-plus-fill me-2"></i>
+                        Add Patient
+                    </h4>
+                    <small>
+                        Register a new patient in the clinic records
+                    </small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        The OP Number will be generated automatically after saving.
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+
+                            <!-- Name -->
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Patient Name
+                                </label>
+
+                                {{ form.name }}
+
+                                {% if form.name.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Age -->
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    Age
+                                </label>
+
+                                {{ form.age }}
+
+                                {% if form.age.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.age.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    Gender
+                                </label>
+
+                                {{ form.gender }}
+
+                                {% if form.gender.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.gender.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Date
+                                </label>
+
+                                {{ form.date }}
+
+                                {% if form.date.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.date.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Place -->
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Place
+                                </label>
+
+                                {{ form.place }}
+
+                                {% if form.place.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.place.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Phone Number
+                                </label>
+
+                                {{ form.phone }}
+
+                                {% if form.phone.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.phone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'staff_dashboard' %}"
+                               class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>
+                                Back
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-warning">
+                                <i class="bi bi-person-plus-fill me-1"></i>
+                                Add Patient
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
