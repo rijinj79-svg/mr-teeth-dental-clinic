@@ -8,8 +8,6 @@
 
     <div class="container">
 
-        <!-- ================= HEADER ================= -->
-
         <div class="mb-4">
 
             <div class="eyebrow">
@@ -26,9 +24,6 @@
 
         </div>
 
-
-        <!-- ================= EXPENSE FORM ================= -->
-
         <div class="card border-0 shadow-sm">
 
             <div class="card-body p-4">
@@ -36,9 +31,6 @@
                 <form method="POST">
 
                     {% csrf_token %}
-
-
-                    <!-- Form Errors -->
 
                     {% if form.non_field_errors %}
 
@@ -52,9 +44,6 @@
 
 
                     <div class="row g-3">
-
-
-                        <!-- Date -->
 
                         <div class="col-md-4">
 
@@ -74,9 +63,6 @@
 
                         </div>
 
-
-                        <!-- Description -->
-
                         <div class="col-md-8">
 
                             <label class="form-label">
@@ -95,9 +81,6 @@
 
                         </div>
 
-
-                        <!-- Amount -->
-
                         <div class="col-md-4">
 
                             <label class="form-label">
@@ -115,9 +98,6 @@
                             {% endfor %}
 
                         </div>
-
-
-                        <!-- Notes -->
 
                         <div class="col-12">
 
