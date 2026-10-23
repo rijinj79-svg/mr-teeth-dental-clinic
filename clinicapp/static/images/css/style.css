@@ -444,3 +444,71 @@ html, body, body *:not(.bi):not([class^="bi-"]):not([class*=" bi-"]) {
         height: 210px;
     }
 }
+
+/* ==============================
+   THE BEGINNING OF A VISION
+============================== */
+
+.vision-story {
+    background: #fffdf7;
+}
+
+.vision-story .lead {
+    color: #444;
+    line-height: 1.9;
+}
+
+.vision-story p {
+    line-height: 1.85;
+}
+
+.vision-quote {
+    padding: 24px;
+    border-left: 4px solid #d4a017;
+    background: #fff;
+    border-radius: 0 14px 14px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.vision-quote i {
+    font-size: 2rem;
+    color: #b8860b;
+}
+
+.vision-quote h3 {
+    font-family: Georgia, serif;
+    color: #704214;
+    line-height: 1.5;
+    font-size: 1.5rem;
+}
+
+.vision-quote p {
+    color: #8a6d3b;
+    font-style: italic;
+}
+
+.vision-highlight {
+    padding: 35px 25px;
+    height: 100%;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #f0dfb0;
+    box-shadow: 0 8px 28px rgba(90, 60, 10, 0.08);
+}
+
+.vision-highlight i {
+    font-size: 3rem;
+    color: #b8860b;
+}
+
+.vision-highlight h4 {
+    margin-top: 18px;
+    margin-bottom: 12px;
+    color: #704214;
+    font-weight: 700;
+}
+
+.vision-highlight p {
+    color: #555;
+    line-height: 1.8;
+}

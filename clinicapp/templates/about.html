@@ -1,4 +1,208 @@
-{% extends 'base.html' %}{% load static %}{% block title %}About Us | Mr.Teeth{% endblock %}
-{% block content %}<section class="page-hero"><div class="container"><div class="eyebrow text-warning">About Mr.Teeth</div><h1 class="display-4 mt-2">A clinic built around your smile</h1><p class="lead mb-0 col-lg-8">Modern dentistry, experienced care and a welcoming environment in Malayinkeezh, Trivandrum.</p></div></section>
-<section class="section"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6"><img src="{% static 'images/interior1.jpg' %}" class="img-fluid rounded-4 shadow" alt="Mr.Teeth clinic interior"></div><div class="col-lg-6"><div class="eyebrow">Our approach</div><h2 class="section-title mt-2">Simple, honest and patient-focused</h2><p class="section-copy">Mr.Teeth Multispeciality Dental Clinic is committed to providing dependable dental care in a comfortable setting. We believe patients should understand their treatment and feel confident about every step.</p><div class="row g-3 mt-2"><div class="col-sm-6"><div class="stats"><strong class="d-block fs-4">Modern</strong><span class="small-muted">Equipment & techniques</span></div></div><div class="col-sm-6"><div class="stats"><strong class="d-block fs-4">Caring</strong><span class="small-muted">Patient experience</span></div></div></div></div></div></div></section>
-<section class="section bg-white"><div class="container"><div class="text-center mb-5"><div class="eyebrow">Our values</div><h2 class="section-title mt-2">What matters to us</h2></div><div class="row g-4"><div class="col-md-4"><div class="feature-card p-4"><div class="icon-box mb-3"><i class="bi bi-shield-check"></i></div><h5 class="fw-bold">Trust</h5><p class="text-secondary">Clear information and respectful communication at every stage.</p></div></div><div class="col-md-4"><div class="feature-card p-4"><div class="icon-box mb-3"><i class="bi bi-stars"></i></div><h5 class="fw-bold">Quality</h5><p class="text-secondary">Thoughtful dental care using modern clinical practices.</p></div></div><div class="col-md-4"><div class="feature-card p-4"><div class="icon-box mb-3"><i class="bi bi-people"></i></div><h5 class="fw-bold">Comfort</h5><p class="text-secondary">A friendly environment for patients of different ages.</p></div></div></div></div></section>{% endblock %}
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Mr.Teeth{% endblock %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <div class="eyebrow text-warning">About Mr.Teeth</div>
+        <h1 class="display-4 mt-2">A Clinic Built Around Your Smile</h1>
+        <p class="lead mb-0 col-lg-8">
+            Modern dentistry, experienced care and a welcoming
+            environment in Malayinkeezh, Trivandrum.
+        </p>
+    </div>
+</section>
+
+
+<!-- The Beginning of a Vision -->
+<section class="section vision-story">
+    <div class="container">
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-8">
+                <div class="eyebrow">Our Story</div>
+
+                <h2 class="section-title mt-2">
+                    The Beginning of a Vision
+                </h2>
+
+                <p class="lead">
+                    Every great journey begins with a dream. For
+                    <strong>Dr. Jobu J V</strong>, that dream was to
+                    make quality dental care more than a clinical
+                    service — to make it a compassionate, comfortable,
+                    and memorable experience for every person who
+                    walks through the door.
+                </p>
+
+                <p>
+                    A dentist by profession and a visionary by passion,
+                    he believes that every individual deserves a healthy
+                    smile, personalised attention, and the confidence
+                    to live life without hesitation.
+                </p>
+
+                <p>
+                    His journey has been guided by a simple philosophy:
+                    treat every patient as a valuable human being,
+                    deliver genuine quality, and make every smile matter.
+                </p>
+
+                <div class="vision-quote mt-4">
+                    <i class="bi bi-quote"></i>
+
+                    <h3>
+                        A healthy smile can change a person's life.
+                    </h3>
+
+                    <p class="mb-0">
+                        A dream to create millions of smiles.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="vision-highlight text-center">
+                    <i class="bi bi-heart-pulse"></i>
+
+                    <h4>Our Vision</h4>
+
+                    <p class="mb-0">
+                        Compassionate care, personalised attention,
+                        and healthy smiles for every patient.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Our Approach -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+                <img
+                    src="{% static 'images/interior1.jpg' %}"
+                    class="img-fluid rounded-4 shadow"
+                    alt="Mr.Teeth Multispeciality Dental Clinic interior"
+                >
+            </div>
+
+            <div class="col-lg-6">
+                <div class="eyebrow">Our Approach</div>
+
+                <h2 class="section-title mt-2">
+                    Simple, Honest and Patient-Focused
+                </h2>
+
+                <p class="section-copy">
+                    Mr.Teeth Multispeciality Dental Clinic is committed
+                    to providing dependable dental care in a comfortable
+                    setting. We believe patients should understand
+                    their treatment and feel confident about every step.
+                </p>
+
+                <div class="row g-3 mt-2">
+
+                    <div class="col-sm-6">
+                        <div class="stats">
+                            <strong class="d-block fs-4">Modern</strong>
+                            <span class="small-muted">
+                                Equipment and techniques
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="stats">
+                            <strong class="d-block fs-4">Caring</strong>
+                            <span class="small-muted">
+                                Patient experience
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Our Values -->
+<section class="section bg-white">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="eyebrow">Our Values</div>
+
+            <h2 class="section-title mt-2">
+                What Matters to Us
+            </h2>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Trust -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h5 class="fw-bold">Trust</h5>
+
+                    <p class="text-secondary mb-0">
+                        Clear information and respectful communication
+                        at every stage of your dental care.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quality -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <h5 class="fw-bold">Quality</h5>
+
+                    <p class="text-secondary mb-0">
+                        Thoughtful dental care using modern
+                        clinical practices.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Comfort -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h5 class="fw-bold">Comfort</h5>
+
+                    <p class="text-secondary mb-0">
+                        A friendly and welcoming environment for
+                        patients of different ages.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
